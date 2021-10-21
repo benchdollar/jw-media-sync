@@ -1,0 +1,10 @@
+= JW Media Synchronizer
+Benjamin Knoop
+2021-10-21
+
+Batch downloads of media files to a local directory from JW.org
+
+The _JW Media Synchronizer_ calls the JW.org API to find available media items, filtered by publication type and language. It then checks a local directory for already downloaded files and allows the user to batch download all missing files or a selection thereof. A missing file is determined simply by filename comparison.
+
+
+
