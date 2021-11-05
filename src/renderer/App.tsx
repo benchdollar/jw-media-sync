@@ -1,17 +1,17 @@
-// import { ThemeProvider } from '@mui/system';
+import { ThemeProvider } from '@mui/material/styles';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import MainFrame from './components/MainFrame';
-// import MyTheme from './Theme';
-// import './App.global.css';
+import MyTheme from './Theme';
+import './App.global.css';
 
 export default function App() {
   return (
-    <Router>
-      <Switch>
-        {/* <ThemeProvider theme={MyTheme}> */}
+    <ThemeProvider theme={MyTheme}>
+      <Router>
+        <Switch>
           <Route path="/" component={MainFrame} />
-        {/* </ThemeProvider> */}
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 }

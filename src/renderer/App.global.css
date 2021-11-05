@@ -4,9 +4,11 @@
  */
 body {
   position: relative;
-  color: white;
+  /* color: white; */
   height: 100vh;
-  background: linear-gradient(
+  /* padding: 0pt; */
+  margin: 0px;
+  /* background: linear-gradient(
     200.96deg,
     #fedc2a -29.09%,
     #dd5789 51.77%,
@@ -16,10 +18,17 @@ body {
   overflow-y: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
-button {
+div#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* button {
   background-color: white;
   padding: 10px 20px;
   border-radius: 10px;
@@ -57,4 +66,4 @@ a:hover {
   justify-content: center;
   align-items: center;
   margin: 20px 0;
-}
+} */
