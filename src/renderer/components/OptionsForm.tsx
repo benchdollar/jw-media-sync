@@ -11,6 +11,7 @@ export default function OptionsForm() {
           variant="filled"
           fullWidth
         />
+        <TextField id="filetype" label="File Type" variant="filled" fullWidth />
         <TextField id="language" label="Language" variant="filled" fullWidth />
       </Stack>
       <Stack direction="row" spacing={2}>
