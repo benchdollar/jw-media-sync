@@ -1,33 +1,12 @@
 import { FolderOpen } from '@mui/icons-material';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
-
-interface CodeItem {
-  code: string;
-  name: string;
-}
+import { CodeItem } from '../model/CodeItem';
+import { publications, filetypes, languages } from '../model/Data';
 
 function label(item: CodeItem): string {
   return `${item.name} (${item.code})`;
 }
-
-const publications: Array<CodeItem> = [
-  { code: 'pkon', name: 'Children Songs' },
-  { code: 'pk', name: 'Become Jehovah’s Friend' },
-  { code: 'pksjj', name: 'Become Jehovah’s Friend—Sing With Us' },
-  { code: 'sjjm', name: '"Sing Out Joyfully" to Jehovah — Meetings' },
-  { code: 'sjjc', name: '"Sing Out Joyfully" to Jehovah — Vocals' },
-  { code: 'sjji', name: '"Sing Out Joyfully" to Jehovah — Instrumental' },
-  { code: 'osg', name: 'Original Songs' },
-];
-
-const filetypes: Array<string> = ['MP4', 'MP3'];
-
-const languages: Array<CodeItem> = [
-  { code: 'X', name: 'German' },
-  { code: 'E', name: 'English' },
-  { code: 'U', name: 'Russian' },
-];
 
 export default function OptionsForm() {
   const [publicationSymbol, setPublicationSymbol] = useState('');
