@@ -1,4 +1,4 @@
-interface CodeItem {
+export interface CodeItem {
   code: string;
   name: string;
 }
