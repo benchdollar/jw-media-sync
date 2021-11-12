@@ -12,6 +12,7 @@ export default function OptionsForm() {
   const [publicationSymbol, setPublicationSymbol] = useState('');
   const [filetype, setFiletype] = useState(filetypes[0]);
   const [language, setLanguage] = useState(label(languages[0]));
+  const [folder, setFolder] = useState('');
 
   return (
     <Stack spacing={2}>
@@ -76,6 +77,10 @@ export default function OptionsForm() {
           label="Folder"
           variant="filled"
           fullWidth
+          value={folder}
+          onChange={(event) => {
+            setFolder(event.target.value);
+          }}
         />
         <Button
           color="secondary"
