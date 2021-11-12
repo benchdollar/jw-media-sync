@@ -1,9 +1,10 @@
-import * as React from 'react';
+// import * as React from 'react';
 import { Paper, Stack, Theme, Typography } from '@mui/material';
-import { DefaultTheme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 
-import OptionsForm from './OptionsForm';
 import AppBar from './AppBar';
+import OptionsForm from './OptionsForm';
+import ContentContainer from './ContentContainer';
 
 const useStyles = makeStyles((theme: Theme) => ({
   page: {
@@ -48,47 +49,7 @@ export default function MainFrame() {
               overflow: 'hidden',
             }}
           >
-            <Typography variant="body2" sx={{ height: '100%', overflowY: 'scroll' }}>
-              No results yet. sdf sdf sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              {/* fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd sfd s<br />
-              <br />
-              fsd f sdf */}
-            </Typography>
+            <ContentContainer />
           </Paper>
         </Stack>
       </Paper>

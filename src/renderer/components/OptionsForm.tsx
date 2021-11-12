@@ -1,29 +1,70 @@
 import { FolderOpen } from '@mui/icons-material';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
+
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import {
+  setPublicationSymbol,
+  setFiletype,
+  setLanguageMepsCode,
+  setFolder,
+} from '../model/inputsSlice';
+
 import { CodeItem } from '../model/CodeItem';
 import { publications, filetypes, languages } from '../model/Data';
 
-function label(item: CodeItem): string {
+function toLabel(item: CodeItem | null): string {
+  if (item == null) {
+    return '';
+  }
+  if (item.name === '') {
+    return item.code;
+  }
   return `${item.name} (${item.code})`;
 }
 
+function fromLabel(text: string): CodeItem {
+  // assume unknown code string entered by user
+  let res: CodeItem = {
+    code: text,
+    name: '',
+  };
+
+  // now check for CodeItem's toLabel pattern
+  const regexp = /^(.+)\W+\((.+)\)$/;
+  const match = regexp.exec(text.trim());
+  if (match?.length === 3) {
+    res = {
+      code: match[2],
+      name: match[1],
+    };
+  }
+  return res;
+}
+
 export default function OptionsForm() {
-  const [publicationSymbol, setPublicationSymbol] = useState('');
-  const [filetype, setFiletype] = useState(filetypes[0]);
-  const [language, setLanguage] = useState(label(languages[0]));
-  const [folder, setFolder] = useState('');
+  // redux store for 'inputs' slice
+  const inputs = useAppSelector((state) => state.inputs);
+  const dispatch = useAppDispatch();
+
+  // // controlled components
+  // const [publicationSymbol, setPublicationSymbol] = useState(
+  //   inputs.publicationSymbol != null ? inputs.publicationSymbol.code : ''
+  // );
+  // const [filetype, setFiletype] = useState(inputs.filetype);
+  // const [language, setLanguage] = useState(toLabel(inputs.language));
+  // const [folder, setFolder] = useState(inputs.folder);
 
   return (
     <Stack spacing={2}>
       <Stack direction="row" spacing={2}>
         <Autocomplete
-          value={publicationSymbol}
-          inputValue={publicationSymbol}
+          value={toLabel(inputs.publicationSymbol)}
+          inputValue={toLabel(inputs.publicationSymbol)}
           disablePortal
           id="publication-symbol"
           options={...publications.map((item) => {
-            return label(item);
+            return toLabel(item);
           })}
           renderInput={(params) => (
             <TextField
@@ -33,14 +74,14 @@ export default function OptionsForm() {
             />
           )}
           onInputChange={(_event, newInputValue) => {
-            setPublicationSymbol(newInputValue);
+            dispatch(setPublicationSymbol(fromLabel(newInputValue)));
           }}
           fullWidth
           freeSolo
         />
         <Autocomplete
-          value={filetype}
-          inputValue={filetype}
+          value={inputs.filetype}
+          inputValue={inputs.filetype}
           disablePortal
           id="filetype"
           options={filetypes}
@@ -48,24 +89,24 @@ export default function OptionsForm() {
             <TextField {...params} variant="filled" label="File Type" />
           )}
           onInputChange={(_event, newInputValue) => {
-            setFiletype(newInputValue);
+            dispatch(setFiletype(newInputValue));
           }}
           disableClearable
           sx={{ minWidth: 120 }}
         />
         <Autocomplete
-          value={language}
-          inputValue={language}
+          value={toLabel(inputs.language)}
+          inputValue={toLabel(inputs.language)}
           disablePortal
           id="language-code"
           options={...languages.map((item) => {
-            return label(item);
+            return toLabel(item);
           })}
           renderInput={(params) => (
             <TextField {...params} variant="filled" label="Language Code" />
           )}
           onInputChange={(_event, newInputValue) => {
-            setLanguage(newInputValue);
+            dispatch(setLanguageMepsCode(fromLabel(newInputValue)));
           }}
           fullWidth
           freeSolo
@@ -77,9 +118,9 @@ export default function OptionsForm() {
           label="Folder"
           variant="filled"
           fullWidth
-          value={folder}
+          value={inputs.folder}
           onChange={(event) => {
-            setFolder(event.target.value);
+            dispatch(setFolder(event.target.value));
           }}
         />
         <Button
