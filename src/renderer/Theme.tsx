@@ -23,6 +23,15 @@ export default createTheme({
         //
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-disabled': {
+            backgroundColor: '#777777',
+          },
+        },
+      },
+    },
     MuiAppBar: {
       defaultProps: {
         enableColorOnDark: true,

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import inputsReducer from '../model/inputsSlice';
+import apiReducer from '../model/apiSlice';
 
 export const store = configureStore({
   reducer: {
     inputs: inputsReducer,
+    api: apiReducer,
   },
 });
 

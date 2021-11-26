@@ -1,6 +1,5 @@
 import { FolderOpen } from '@mui/icons-material';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
-import { useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../store/hooks';
 import {
@@ -8,7 +7,9 @@ import {
   setFiletype,
   setLanguageMepsCode,
   setFolder,
+  InputsState,
 } from '../model/inputsSlice';
+import { RequestParameters, submitRequest } from '../model/apiSlice';
 
 import { CodeItem } from '../model/CodeItem';
 import { publications, filetypes, languages } from '../model/Data';
@@ -54,6 +55,22 @@ export default function OptionsForm() {
   // const [filetype, setFiletype] = useState(inputs.filetype);
   // const [language, setLanguage] = useState(toLabel(inputs.language));
   // const [folder, setFolder] = useState(inputs.folder);
+
+  const requestParameters: RequestParameters = {
+    publicationSymbol:
+      inputs.publicationSymbol == null ? '' : inputs.publicationSymbol.code,
+    filetype: inputs.filetype.trim().toLowerCase(),
+    languageCode: inputs.language.code,
+  };
+
+  const validRequestParameters: boolean =
+    requestParameters.publicationSymbol?.length > 0 &&
+    requestParameters.filetype?.length > 0 &&
+    requestParameters.languageCode?.length > 0;
+
+  const findMediaFiles = () => {
+    dispatch(submitRequest(requestParameters));
+  };
 
   return (
     <Stack spacing={2}>
@@ -133,7 +150,13 @@ export default function OptionsForm() {
           <span>Open Folder</span>
         </Button>
       </Stack>
-      <Button variant="contained">Find Media Files</Button>
+      <Button
+        variant="contained"
+        onClick={findMediaFiles}
+        disabled={!validRequestParameters}
+      >
+        Find Media Files
+      </Button>
     </Stack>
   );
 }
