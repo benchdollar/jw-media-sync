@@ -4,7 +4,7 @@ import { makeStyles, useTheme } from '@mui/styles';
 
 import AppBar from './AppBar';
 import OptionsForm from './OptionsForm';
-import ContentContainer from './ContentContainer';
+import JwMediaPubApiContainer from './JwMediaPubApiContainer';
 
 const useStyles = makeStyles((theme: Theme) => ({
   page: {
@@ -49,7 +49,7 @@ export default function MainFrame() {
               overflow: 'hidden',
             }}
           >
-            <ContentContainer />
+            <JwMediaPubApiContainer />
           </Paper>
         </Stack>
       </Paper>
